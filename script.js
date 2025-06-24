@@ -370,6 +370,7 @@ function updateBusPosition() {
   if (busArrivesIn < 1 && atBusStop) {
     b.style.opacity = 1;
   } else if (busArrivesIn < 1) {
+    b.style.opacity = 0;
     hideBus();
     setTimeout(function() {
       showBus();

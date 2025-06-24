@@ -100,7 +100,8 @@ button {
 }
 
 #min-walk {
-  text-align: right;
+  margin-top: 4px;
+  text-align: center;
   font-size: 12px;
 }
 
