@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Catch your bus</title>
+    <meta property="og:title" content="Catch your bus">
+    <meta property="og:description" content="are you going to make it??">
+    <meta property="og:image" content="">
+    <link href="style.css" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚍</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="container">
+        <div id="start-screen">
+            <div>🔵 Home</div>
+            <div>|</div>
+            <div>📍 The restaurant</div>
+            <br/>
+            <div>---------------------</div>
+            <br/>
+            <div>Next bus in <span class="emph" style="color:green">15 min</span></div>
+            <br/>
+            <div class="deemph">🚶 10 min > 🚍 > 🚶 2 min </div>
+            <div class="deemph">Departures · Every 20 min</div>
+            <button id="go">GO</button>
+          </div>
+      <div id="bus-screen">
+        <div id="timing">Next bus in <span class="time-indicator-color emph" id="bus-time-update"><span id="bus-arrives-in">15</span> min · <span id="bus-timeliness">On time</span></span></div>
+        <div id="caught-bus-container">
+          <div id="missed-the-bus">You missed the bus :(</div>
+          <div id="caught-the-bus">You're on your way <3</div>
+        </div>
+        <div id="you">🔵</div>
+        <div><span id="home">🏠</span>=============================<span id="bus-stop">🚏</span><span id="bus">🚍</span></div>
+        <div id="min-walk"><span id="min-walk-counter">10</span> min walk</div>
+        <div class="button-container">
+          <button id="walk">Walk (1 min)</button>
+          <button id="run">Run (1 min)</button>
+          <button id="random" data-time="2">Use the bathroom (2 min)</button>
+          <button id="leave">Leave home (1 min)</button>
+          <button id="do-nothing">Do nothing (1 min)</button>
+          <button id="replay">Replay</button>
+        </div>
+      </div>
+    </div>
+    <div id="footer"><a href="https://www.instagram.com/anotherbrowsertab" target="_blank">@anotherbrowsertab</a></div>
+    <script src="script.js"></script>
+  </body>
+</html>

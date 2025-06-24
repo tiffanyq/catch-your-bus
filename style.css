@@ -1,0 +1,221 @@
+html {
+  font-size: 16px;
+  font-family: 'Courier Prime', monospace;
+}
+
+body {
+  width: 364px;
+  margin: 0 auto;
+  margin-top: 24px;
+}
+.container {
+  display: flex;
+}
+
+#start-screen {
+  border: 1px solid #989898;
+  padding: 48px 48px;
+  margin: 0 auto;
+}
+
+#go {
+  font-size: 24px;
+  font-family: 'Courier Prime', monospace;
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #0000EE;
+  border: 1px solid #0000EE;
+  color: white;
+  margin-top: 28px;
+}
+
+#go:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #0000EE;
+  border: 1px solid #0000EE;
+}
+
+#bus-screen {
+  margin: 0 auto;
+}
+
+#caught-bus-container {
+  font-size: 14px;
+  margin-top: 12px;
+  text-align: center;
+  padding-bottom: 64px;
+}
+
+#missed-the-bus {
+  visibility: hidden;
+  color: red;
+}
+
+#caught-the-bus {
+  display: none;
+  color: green;
+}
+
+#bus-screen, #run, #walk, #replay {
+  display: none;
+}
+
+#home, #bus, #bus-stop {
+  font-size: 28px;
+}
+
+#bus {
+  text-align: right;
+  opacity: 0;
+}
+
+button {
+  font-family: 'Courier Prime', monospace;
+}
+
+.button-container {
+  margin-top:24px;
+}
+
+.button-container button {
+  background-color: white;
+  border: 1px solid #0000EE;
+  color: #0000EE;
+  padding: 16px 16px;
+  width: 364px;
+  margin-top: 16px;
+}
+
+.button-container button:hover {
+  background-color: #0000EE;
+  border: 1px solid #0000EE;
+  color: white;
+  cursor: pointer;
+}
+
+#timing {
+  text-align: center;
+}
+
+#min-walk {
+  text-align: right;
+  font-size: 12px;
+}
+
+#you {
+  margin-bottom: -24px;
+}
+
+#footer {
+  font-size: 10px;
+  text-align: center;
+  margin-top: 36px;
+}
+#replay {
+  background-color: white;
+  border: 1px solid green;
+  color: green;
+}
+
+#replay:hover {
+  background-color: green;
+  border: 1px solid green;
+  color: white;
+}
+
+.emph {
+  font-weight: 700;
+}
+
+.deemph {
+  color: #989898;
+  font-size: 12px;
+}
+
+.time-animation {
+	animation: 2s ease-out 0s 1 slideFadeUp;
+  animation-fill-mode: both;
+  color: red;
+  font-weight: 700;
+  user-select: none;
+  pointer-events: none;
+  background-color: yellow;
+  position: absolute;
+}
+
+.time-animation:hover {
+  cursor: pointer;
+}
+
+.change-color-on-time {
+  color: green;
+  animation: 1s ease-out 0s 1 colorChangeOnTime;
+}
+
+.change-color-delayed {
+  color: red;
+  animation: 1s ease-out 0s 1 colorChangeDelayed;
+}
+
+.change-color-early {
+  color: chocolate;
+  animation: 1s ease-out 0s 1 colorChangeEarly;
+}
+
+.fade-away {
+  animation: 2s ease-out 0s 1 fadeAway;
+}
+
+@keyframes slideFadeUp {
+	0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeAway {
+	0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes colorChangeOnTime {
+	0% {
+    color: blue;
+    background-color: yellow;
+  }
+  100% {
+    color: green;
+    background-color: none;
+  }
+}
+
+@keyframes colorChangeDelayed {
+	0% {
+    color: blue;
+    background-color: yellow;
+  }
+  100% {
+    color: red;
+    background-color: none;
+  }
+}
+
+@keyframes colorChangeEarly {
+	0% {
+    color: blue;
+    background-color: yellow;
+  }
+  100% {
+    color: chocolate;
+    background-color: none;
+  }
+}
