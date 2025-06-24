@@ -82,9 +82,10 @@ button {
   background-color: white;
   border: 1px solid #0000EE;
   color: #0000EE;
-  padding: 16px 16px;
+  padding: 20px 16px;
   width: 364px;
   margin-top: 16px;
+  font-size: 14px;
 }
 
 .button-container button:hover {
@@ -108,7 +109,7 @@ button {
 }
 
 #footer {
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
   margin-top: 36px;
 }
