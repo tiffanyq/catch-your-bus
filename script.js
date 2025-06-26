@@ -4,10 +4,11 @@ let markerPosition = 0;
 let busArrivesIn = 15;
 let busDelay = 0;
 let currColorClass = "change-color-on-time";
-const MARKER_MULTIPLIER = 14;
+let addedArriveAtBusStopDelay = false;
+const MARKER_MULTIPLIER = 13;
 const INITIAL_BUS = 15;
 const INITIAL_WALK = 10;
-const MAX_DISTANCE = 290;
+const MAX_DISTANCE = 278;
 const BUS_FREQUENCY = 20;
 
 const PRE_LEAVE_EVENTS = [
@@ -88,9 +89,33 @@ const PRE_LEAVE_EVENTS = [
     time: 2,
   },
   {
-    content: "Decide on a new favourite colour",
+    content: "Pick a new favourite colour",
     time: 3,
-  }
+  },
+  {
+    content: "Do some online shopping",
+    time: 10,
+  },
+  {
+    content: "Make coffee",
+    time: 5,
+  },
+  {
+    content: "Look for the sunglasses that have been missing for months",
+    time: 12,
+  },
+  {
+    content: "Dance",
+    time: 30,
+  },
+  {
+    content: "Find your wallet",
+    time: 5,
+  },
+  {
+    content: "Think a little",
+    time: 5,
+  } // 26
 ];
 
 const POST_LEAVE_EVENTS = [
@@ -115,7 +140,7 @@ const POST_LEAVE_EVENTS = [
     time: 5,
   },
   {
-    content: "Stare at a happy hour poster",
+    content: "Inspect a happy hour sign outside a restaurant and take a photo of it",
     time: 2,
   },
   {
@@ -173,7 +198,27 @@ const POST_LEAVE_EVENTS = [
   {
     content: "Really, REALLY ask yourself whether you prefer still or sparkling if both were the same price",
     time: 20,
-  }
+  },
+  {
+    content: "Have fun",
+    time: 3,
+  },
+  {
+    content: "Decide if that cloud looks more like a dog or sheep",
+    time: 5,
+  },
+  {
+    content: "Check that you have your keys",
+    time: 10,
+  },
+  {
+    content: "Spot a squirrel",
+    time: 3,
+  },
+  {
+    content: "Cross the street unnecessarily just to feel something",
+    time: 3,
+  } // 25
 ];
 
 const POST_BUS_STOP_EVENTS = [
@@ -238,7 +283,7 @@ const POST_BUS_STOP_EVENTS = [
     time: 5,
   },
   {
-    content: "Sway",
+    content: "Sway in the wind",
     time: 10,
   },
   {
@@ -256,17 +301,42 @@ const POST_BUS_STOP_EVENTS = [
   {
     content: "Start scrolling",
     time: 60,
-  }
+  },
+  {
+    content: "Record the leaves dancing in the breeze",
+    time: 2,
+  },
+  {
+    content: "People-watch",
+    time: 3,
+  },
+  {
+    content: "Notice the blob beneath you at the bus stop that looks like a heart",
+    time: 1,
+  },
+  {
+    content: "Adjust your shirt collar",
+    time: 1,
+  },
+  {
+    content: "Check if you have your wallet",
+    time: 10,
+  } // 25
 ];
 
 function startCatchingBus() {
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("bus-screen").style.display = "block";
+  // update the destination
+  const dreamDestination = document.getElementById("dream-destination").value;
+  if (dreamDestination) {
+    document.getElementById("bus-screen-destination").innerText = dreamDestination;
+  }
 }
 
-function updateScene(time, button, x, y) {
+function updateScene(time, button, x, y, walkTimeUpdated) {
   updateMarker();
-  updateWalkTime();
+  updateWalkTime(walkTimeUpdated);
   updateRandom();
   updateBusPosition();
   updateBusArrival();
@@ -281,49 +351,44 @@ function leave(e) {
   document.getElementById("leave").style.display = "none";
   markerPosition += 2;
   busArrivesIn -= 1;
-  updateScene(1, "leave", e.clientX, e.clientY);
+  updateScene(1, "leave", e.clientX, e.clientY, walkTimeUpdated=false);
 }
 
 function run(e) {
   markerPosition += 3;
   busArrivesIn -= 1;
-  updateScene(1, "run", e.clientX, e.clientY);
+  updateScene(1, "run", e.clientX, e.clientY, walkTimeUpdated=true);
 }
 
 function walk(e) {
   markerPosition += 2;
   busArrivesIn -= 1;
-  updateScene(1, "walk", e.clientX, e.clientY);
+  updateScene(1, "walk", e.clientX, e.clientY, walkTimeUpdated=true);
 }
 
 function random(e) {
   const t = document.getElementById("random").getAttribute("data-time");
   busArrivesIn -= t;
-  updateScene(t, "random", e.clientX, e.clientY);
+  updateScene(t, "random", e.clientX, e.clientY, walkTimeUpdated=false);
 }
 
 function updateRandom() {
+  const r = document.getElementById("random");
+  let c;
   if (!leftHouse) {
-    const c = PRE_LEAVE_EVENTS[Math.floor(Math.random() * PRE_LEAVE_EVENTS.length)];
-    const r = document.getElementById("random");
-    r.innerText = c['content'] + " (" + c['time'] + " min)";
-    r.setAttribute("data-time", c['time']);
+    c = PRE_LEAVE_EVENTS[Math.floor(Math.random() * PRE_LEAVE_EVENTS.length)];
   } else if (!atBusStop) {
-    const c = POST_LEAVE_EVENTS[Math.floor(Math.random() * POST_LEAVE_EVENTS.length)];
-    const r = document.getElementById("random");
-    r.innerText = c['content'] + " (" + c['time'] + " min)";
-    r.setAttribute("data-time", c['time']);
+    c = POST_LEAVE_EVENTS[Math.floor(Math.random() * POST_LEAVE_EVENTS.length)];
   } else {
-    const c = POST_BUS_STOP_EVENTS[Math.floor(Math.random() * POST_BUS_STOP_EVENTS.length)];
-    const r = document.getElementById("random");
-    r.innerText = c['content'] + " (" + c['time'] + " min)";
-    r.setAttribute("data-time", c['time']);
+    c = POST_BUS_STOP_EVENTS[Math.floor(Math.random() * POST_BUS_STOP_EVENTS.length)];
   }
+  r.innerHTML = c['content'] + " <span id='random-time'>(" + c['time'] + " min)";
+  r.setAttribute("data-time", c['time']);
 }
 
 function doNothing(e) {
   busArrivesIn -= 1;
-  updateScene(1, "do-nothing", e.clientX, e.clientY);
+  updateScene(1, "do-nothing", e.clientX, e.clientY, walkTimeUpdated=false);
 }
 
 function updateMarker() {
@@ -337,11 +402,19 @@ function updateMarker() {
   }
 }
 
-function updateWalkTime () {
+function updateWalkTime (walkTimeUpdated) {
   const l = document.getElementById("min-walk-counter");
   let n = INITIAL_WALK - Math.floor((markerPosition * MARKER_MULTIPLIER / MAX_DISTANCE) * INITIAL_WALK);
   n = Math.max(0, n);
   l.innerText = n.toString();
+
+  // also animate walking timing update
+  if (walkTimeUpdated) {
+    hideWalkTiming();
+    setTimeout(function() {
+      showWalkTiming();
+    }, 1);
+  }
 }
 
 function animateTimeDecrease(time, button, x, y) {
@@ -398,6 +471,14 @@ function showBus(){
   document.getElementById("bus").classList.add("fade-away");
 }
 
+function hideWalkTiming() {
+  document.getElementById("walk-counter-highlight").classList.remove("yellow-highlight");
+}
+
+function showWalkTiming(){
+  document.getElementById("walk-counter-highlight").classList.add("yellow-highlight");
+}
+
 function updateBusArrival() {
   const l = document.getElementById("bus-arrives-in");
   // vary the bus timing!!!
@@ -415,20 +496,36 @@ function updateBusArrival() {
   const label = document.getElementById("bus-time-update");
   const description = document.getElementById("bus-timeliness");
   const n = Math.random();
+  let tempBusDelay = 0;
   if (n < 0.25) {
-    busDelay += 1;
+    tempBusDelay = 1; // bus running late
   } else if (n > 0.75) {
-    busDelay -= 1;
+    tempBusDelay = -1; // bus running faster
   }
 
   // but reset the delay if you missed the bus OR if you catch the bus
   if (busArrivesIn <= 0) {
+    tempBusDelay = 0;
     busDelay = 0;
   }
 
+  // but if you just got to the bus stop...sudden 30 min delay
+  const holderForDelayAddedYet = addedArriveAtBusStopDelay; // false if delay not added yet
+  // IMPORTANT: updates busArrivesIn
+  if (atBusStop && !addedArriveAtBusStopDelay) {
+    tempBusDelay = 30;
+    addedArriveAtBusStopDelay = true; // delay now added, but we remember it was false at the start
+  }
+
+  busDelay += tempBusDelay; // updates overall bus delay
+  busArrivesIn += tempBusDelay;
+
+  const justArrivedToBusStop = holderForDelayAddedYet !== addedArriveAtBusStopDelay;
+
   // UPDATE THE BUS ARRIVAL TIME
+
   // you caught the bus
-  if (busArrivesIn <= 0 && atBusStop) {
+  if (busArrivesIn <= 0 && atBusStop && !justArrivedToBusStop) {
     busArrivesIn = 0;
     endGame();
   } else if (busArrivesIn <= 0 && !atBusStop) { // bus is there, you are not
@@ -438,7 +535,41 @@ function updateBusArrival() {
     // reset the missed bus message
     document.getElementById("missed-the-bus").style.visibility = "hidden";
   }
+  // you just arrived to the bus stop...
+  if (justArrivedToBusStop) {
+    document.getElementById("sudden-delay").style.display = "block";
+    document.getElementById("missed-the-bus").style.display = "none";
+  } else {
+    document.getElementById("sudden-delay").style.display = "none";
+    document.getElementById("missed-the-bus").style.display = "block";
+  }
+
   l.innerText = busArrivesIn;
+
+  // use tempBusDelay to generate floating labels
+  let s;
+  let currDelayClass;
+  if (tempBusDelay < 0) {
+    s = tempBusDelay.toString() + " min early";
+    currDelayClass = "green-text";
+  } else if (tempBusDelay > 0) {
+    s = "+"+ tempBusDelay.toString() + " min delay";
+    currDelayClass = "red-text";
+  }
+
+  if (tempBusDelay !== 0) {
+    const busTimelinessLocation = document.getElementById("bus-timeliness").getBoundingClientRect();
+    const delayLabel = document.createElement("div");
+    delayLabel.style.left = busTimelinessLocation.x.toString() + "px";
+    delayLabel.style.top = busTimelinessLocation.y.toString() + "px";
+    delayLabel.classList.add("time-animation");
+    delayLabel.classList.add(currDelayClass);
+    delayLabel.innerText = s;
+    document.body.appendChild(delayLabel);
+    setTimeout(function() {
+      delayLabel.remove();
+    }, 3000);
+  }
 
   // UPDATE THE BUS DELAY
   if (busDelay < 0) {
@@ -463,6 +594,7 @@ function endGame() {
   const b = document.getElementById("bus");
   b.style.opacity = 1;
   document.getElementById("bus-stop").innerText = "❤️";
+  document.getElementById("sudden-delay").style.display = "none";
   document.getElementById("missed-the-bus").style.display = "none";
   document.getElementById("caught-the-bus").style.display = "block";
   document.getElementById("run").style.display = "none";
@@ -471,6 +603,7 @@ function endGame() {
   document.getElementById("leave").style.display = "none";
   document.getElementById("do-nothing").style.display = "none";
   document.getElementById("replay").style.display = "block";
+  document.body.style.backgroundColor = "palegreen";
 }
 
 function reset() {
@@ -481,11 +614,15 @@ function reset() {
   busDelay = 0;
   currColorClass = "change-color-on-time";
 
+  // reset arrive at bus stop delay
+  addedArriveAtBusStopDelay = false;
+
   // reset on your way text
   document.getElementById("bus-stop").innerText = "🚏";
-  document.getElementById("missed-the-bus").style.display = "block";
   document.getElementById("missed-the-bus").style.visibility = "hidden";
+  document.getElementById("missed-the-bus").style.display = "block";
   document.getElementById("caught-the-bus").style.display = "none";
+  document.getElementById("sudden-delay").style.display = "none";
 
   // update labels
   document.getElementById("bus-arrives-in").innerText = INITIAL_BUS;
@@ -494,18 +631,21 @@ function reset() {
   const b = document.getElementById("bus")
   b.style.opacity = 0;
   b.classList.remove("fade-away");
+  document.getElementById("bus-screen-destination").innerText = "the destination of your dreams <3";
 
   // reset buttons for bus screen
   document.getElementById("run").style.display = "none";
   document.getElementById("walk").style.display = "none";
   document.getElementById("replay").style.display = "none";
   document.getElementById("random").style.display = "block";
+  document.getElementById("random").innerHTML = "Use the bathroom <span id='random-time'>(2 min)</span>";
   document.getElementById("leave").style.display = "block";
   document.getElementById("do-nothing").style.display = "block";
 
-  // show start screen
+  // show start screen and change background color
   document.getElementById("start-screen").style.display = "block";
   document.getElementById("bus-screen").style.display = "none";
+  document.body.style.backgroundColor = "white";
 }
 
 window.addEventListener("load", function(event) {

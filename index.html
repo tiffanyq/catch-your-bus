@@ -13,33 +13,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <div class="container">
         <div id="start-screen">
             <div>🔵 Home</div>
             <div>|</div>
-            <div>📍 The restaurant</div>
+            <div><span id="bus-screen-pin">📍</span> <input id="dream-destination" type="text" placeholder="Where do you want to go?"></div>
             <br/>
             <div>---------------------</div>
             <br/>
             <div>Next bus in <span class="emph" style="color:green">15 min</span></div>
+            <div class="deemph">Bus departs every 20 min</div>
             <br/>
-            <div class="deemph">🚶 10 min > 🚍 > 🚶 2 min </div>
-            <div class="deemph">Departures · Every 20 min</div>
+            <div class="deemph" style="color:black">🚶 10 min > 🚍 > Arrive </div>
+
             <button id="go">GO</button>
           </div>
       <div id="bus-screen">
-        <div id="timing">Next bus in <span class="time-indicator-color emph" id="bus-time-update"><span id="bus-arrives-in">15</span> min · <span id="bus-timeliness">On time</span></span></div>
-        <div id="min-walk"><span id="min-walk-counter">10</span> min walk to the bus stop</div>
+        <div id="timing">Next bus in <span class="time-indicator-color change-color-on-time emph" id="bus-time-update"><span id="bus-arrives-in">15</span> min · <span id="bus-timeliness">On time</span></span></div>
+        <div id="departures">Bus departs every 20 min</div>
+        <div id="min-walk">🚶 <span id="walk-counter-highlight"><span id="min-walk-counter">10</span> min</span> > 🚍 > 📍 Arrive at</div>
+        <span id="bus-screen-destination">the destination of your dreams <3</span></3>
         <div id="caught-bus-container">
           <div id="missed-the-bus">You missed the bus :(</div>
+          <div id="sudden-delay">+30 min bus delay!!!</div>
           <div id="caught-the-bus">You're on your way <3</div>
         </div>
         <div id="you">🔵</div>
-        <div><span id="home">🏠</span>=============================<span id="bus-stop">🚏</span><span id="bus">🚍</span></div>
+        <div><span id="home">🏠</span>=========================<span id="bus-stop">🚏</span><span id="bus">🚍</span></div>
         <div class="button-container">
           <button id="walk">Walk (1 min)</button>
           <button id="run">Run (1 min)</button>
-          <button id="random" data-time="2">Use the bathroom (2 min)</button>
+          <button id="random" data-time="2">Use the bathroom <span id="random-time">(2 min)</span></button>
           <button id="leave">Leave home (1 min)</button>
           <button id="do-nothing">Do nothing (1 min)</button>
           <button id="replay">Replay</button>

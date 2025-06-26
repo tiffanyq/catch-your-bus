@@ -1,5 +1,5 @@
 html {
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Courier Prime', monospace;
 }
 
@@ -7,6 +7,19 @@ body {
   width: 364px;
   margin: 0 auto;
   margin-top: 24px;
+}
+
+#bus-screen-pin {
+  font-size: 24px;
+  vertical-align: middle;
+  margin-left: -4px;
+}
+#dream-destination {
+  width: 220px;
+  margin-left: -8px;
+  height: 24px;
+  font-size: 14px;
+  font-family: 'Courier Prime', monospace;
 }
 .container {
   display: flex;
@@ -38,20 +51,38 @@ body {
 
 #bus-screen {
   margin: 0 auto;
+  margin-top: 12px;
+}
+
+#bus-screen-destination {
+  color: blue;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 #caught-bus-container {
-  font-size: 14px;
+  font-size: 24px;
   margin-top: 12px;
   text-align: center;
-  padding-bottom: 64px;
+  padding-bottom: 28px;
 }
 
 #missed-the-bus {
+  margin-top: 64px;
   visibility: hidden;
   color: red;
 }
 
+#sudden-delay {
+  color: red;
+  margin-top: 64px;
+  display: none;
+}
+
+#random-time {
+  white-space: nowrap;
+
+}
 #caught-the-bus {
   display: none;
   color: green;
@@ -69,7 +100,11 @@ body {
   text-align: right;
   opacity: 0;
 }
-
+#departures {
+  color: #989898;
+  font-size: 14px;
+  margin-top: 4px;
+}
 button {
   font-family: 'Courier Prime', monospace;
 }
@@ -95,14 +130,9 @@ button {
   cursor: pointer;
 }
 
-#timing {
-  text-align: center;
-}
-
 #min-walk {
-  margin-top: 4px;
-  text-align: center;
-  font-size: 12px;
+  margin-top: 24px;
+  font-size: 14px;
 }
 
 #you {
@@ -110,7 +140,7 @@ button {
 }
 
 #footer {
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
   margin-top: 36px;
 }
@@ -132,11 +162,11 @@ button {
 
 .deemph {
   color: #989898;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .time-animation {
-	animation: 2s ease-out 0s 1 slideFadeUp;
+	animation: 3s linear 0s 1 slideFadeUp;
   animation-fill-mode: both;
   color: red;
   font-weight: 700;
@@ -150,23 +180,36 @@ button {
   cursor: pointer;
 }
 
+.red-text {
+  color: red !important;
+}
+
+.green-text {
+  color: green !important;
+}
+
+.yellow-highlight {
+  color: black;
+  animation: 1s ease-in 0s 1 colorChangeNeutral;
+}
+
 .change-color-on-time {
   color: green;
-  animation: 1s ease-out 0s 1 colorChangeOnTime;
+  animation: 1s ease-in 0s 1 colorChangeOnTime;
 }
 
 .change-color-delayed {
   color: red;
-  animation: 1s ease-out 0s 1 colorChangeDelayed;
+  animation: 1s ease-in 0s 1 colorChangeDelayed;
 }
 
 .change-color-early {
   color: chocolate;
-  animation: 1s ease-out 0s 1 colorChangeEarly;
+  animation: 1s ease-in 0s 1 colorChangeEarly;
 }
 
 .fade-away {
-  animation: 2s ease-out 0s 1 fadeAway;
+  animation: 2s ease-in 0s 1 fadeAway;
 }
 
 @keyframes slideFadeUp {
@@ -186,6 +229,17 @@ button {
   }
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes colorChangeNeutral {
+	0% {
+    color: blue;
+    background-color: yellow;
+  }
+  100% {
+    color: black;
+    background-color: none;
   }
 }
 
