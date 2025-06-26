@@ -93,6 +93,10 @@ body {
   font-size: 28px;
 }
 
+#bus-stop {
+  margin-left: 2px;
+}
+
 #bus {
   text-align: right;
   opacity: 0;

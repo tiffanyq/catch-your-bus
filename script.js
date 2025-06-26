@@ -631,7 +631,7 @@ function reset() {
   const b = document.getElementById("bus")
   b.style.opacity = 0;
   b.classList.remove("fade-away");
-  document.getElementById("bus-screen-destination").innerText = "the destination of your dreams <3";
+  document.getElementById("bus-screen-destination").innerText = "The restaurant";
 
   // reset buttons for bus screen
   document.getElementById("run").style.display = "none";
