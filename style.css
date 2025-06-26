@@ -108,10 +108,12 @@ body {
 }
 button {
   font-family: 'Courier Prime', monospace;
+  touch-action: manipulation;
 }
 
 .button-container {
   margin-top:24px;
+  touch-action: manipulation;
 }
 
 .button-container button {

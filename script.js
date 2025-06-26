@@ -420,7 +420,7 @@ function updateWalkTime (walkTimeUpdated) {
 function animateTimeDecrease(time, button, x, y) {
   const s = "-" + time.toString() + " min";
   const label = document.createElement("div");
-  x += 32; // offset to avoid occlusion
+  x -= 96; // offset to avoid occlusion
   y -= 32; // offset to avoid occlusion
   label.style.left = x.toString() + "px";
   label.style.top = y.toString() + "px";
