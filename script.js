@@ -5,10 +5,10 @@ let busArrivesIn = 15;
 let busDelay = 0;
 let currColorClass = "change-color-on-time";
 let addedArriveAtBusStopDelay = false;
-const MARKER_MULTIPLIER = 13;
+const MARKER_MULTIPLIER = 12;
 const INITIAL_BUS = 15;
 const INITIAL_WALK = 10;
-const MAX_DISTANCE = 278;
+const MAX_DISTANCE = 256;
 const BUS_FREQUENCY = 20;
 
 const PRE_LEAVE_EVENTS = [

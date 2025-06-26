@@ -15,19 +15,16 @@ body {
   margin-left: -4px;
 }
 #dream-destination {
-  width: 232px;
+  width: 256px;
   margin-left: -8px;
   height: 24px;
   font-size: 16px;
   font-family: 'Courier Prime', monospace;
 }
-.container {
-  display: flex;
-}
 
 #start-screen {
   border: 1px solid #989898;
-  padding: 48px 48px;
+  padding: 48px 36px;
   margin: 0 auto;
 }
 
