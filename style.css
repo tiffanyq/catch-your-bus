@@ -108,12 +108,10 @@ body {
 }
 button {
   font-family: 'Courier Prime', monospace;
-  touch-action: manipulation;
 }
 
 .button-container {
   margin-top:24px;
-  touch-action: manipulation;
 }
 
 .button-container button {
@@ -126,6 +124,9 @@ button {
   font-size: 14px;
 }
 
+.button-container, button, #road-container, #footer {
+  touch-action: manipulation;
+}
 .button-container button:hover {
   background-color: #0000EE;
   border: 1px solid #0000EE;
@@ -146,6 +147,7 @@ button {
   font-size: 14px;
   text-align: center;
   margin-top: 36px;
+  padding-bottom: 8px;
 }
 #replay {
   background-color: white;
