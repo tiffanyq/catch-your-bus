@@ -15,13 +15,23 @@ body {
   margin-left: -4px;
 }
 #dream-destination {
-  width: 236px;
+  width: 230px;
   margin-left: -8px;
   height: 24px;
   font-size: 16px;
   font-family: 'Courier Prime', monospace;
 }
+#refresh-destination {
+  font-size: 16px;
+  vertical-align: middle;
+  margin-left: -12px;
+  padding: 4px 6px;
+  user-select: none;
+}
 
+#refresh-destination:hover {
+  cursor: pointer;
+}
 #start-screen {
   border: 1px solid #989898;
   padding: 48px 36px;
@@ -124,7 +134,7 @@ button {
   font-size: 14px;
 }
 
-.button-container, button, #road-container, #footer {
+.button-container, button, #road-container, #footer, #refresh-destination {
   touch-action: manipulation;
 }
 .button-container button:hover {

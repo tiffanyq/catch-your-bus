@@ -3,6 +3,7 @@ let atBusStop = false;
 let markerPosition = 0;
 let busArrivesIn = 15;
 let busDelay = 0;
+let lastDestination = -1;
 let currColorClass = "change-color-on-time";
 let addedArriveAtBusStopDelay = false;
 const MARKER_MULTIPLIER = 12;
@@ -323,6 +324,21 @@ const POST_BUS_STOP_EVENTS = [
     time: 10,
   } // 25
 ];
+
+const DESTINATIONS = [
+"The restaurant", "Your friend's place", "The mountains", "Work", "School",
+"Your dreams", "The love of your life", "The cafe", "The library", "The park"
+];
+
+function refreshDestination() {
+  let nextDestination = lastDestination;
+  while (nextDestination === lastDestination) {
+    nextDestination = Math.floor(Math.random() * DESTINATIONS.length);
+  }
+  const d = DESTINATIONS[nextDestination];
+  lastDestination = nextDestination;
+  document.getElementById("dream-destination").value = d;
+}
 
 function startCatchingBus() {
   document.getElementById("start-screen").style.display = "none";
@@ -656,6 +672,7 @@ window.addEventListener("load", function(event) {
   const randomB = document.getElementById("random");
   const doNothingB = document.getElementById("do-nothing");
   const replay = document.getElementById("replay");
+  const refresh = document.getElementById("refresh-destination");
   goB.addEventListener('click', startCatchingBus, false);
   leaveB.addEventListener('click', leave, false);
   runB.addEventListener('click', run, false);
@@ -663,4 +680,5 @@ window.addEventListener("load", function(event) {
   randomB.addEventListener('click', random, false);
   doNothingB.addEventListener('click', doNothing, false);
   replay.addEventListener('click', reset, false);
+  refresh.addEventListener('click', refreshDestination, false);
 });
